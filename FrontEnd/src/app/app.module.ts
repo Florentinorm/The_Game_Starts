@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {MatSliderModule} from '@angular/material/slider';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
@@ -43,8 +43,6 @@ import { ProcesoComprasComponent } from './pages/cliente/proceso-compras/proceso
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
-    MatSliderModule,
     BrowserAnimationsModule,
     MatSidenavModule,
     MatToolbarModule,
