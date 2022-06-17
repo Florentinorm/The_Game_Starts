@@ -43,9 +43,7 @@ import { ProcesoComprasComponent } from './pages/cliente/proceso-compras/proceso
   imports: [
     BrowserModule,
     AppRoutingModule,
-<<<<<<< HEAD
     BrowserAnimationsModule
-=======
     MatSliderModule,
     BrowserAnimationsModule,
     MatSidenavModule,
@@ -73,7 +71,6 @@ import { ProcesoComprasComponent } from './pages/cliente/proceso-compras/proceso
 
 
 
->>>>>>> f1fa27d1582498b1245f267699543f0b04c60dfc
   ],
   providers: [],
   bootstrap: [AppComponent]
