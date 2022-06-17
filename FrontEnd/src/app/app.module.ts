@@ -45,6 +45,8 @@ import { ProcesoComprasComponent } from './pages/cliente/proceso-compras/proceso
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSidenavModule,
+    MatCardMdImage,
+    MatSliderModule,
     MatToolbarModule,
     MatListModule,
     MatIconModule,
