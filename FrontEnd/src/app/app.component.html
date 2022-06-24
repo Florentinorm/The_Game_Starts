@@ -1,59 +1,61 @@
 <div class="contenedor-padre">
     <mat-toolbar class="barra">
-      <mat-toolbar-row>
-        <button (click)="cajon.toggle()" mat-icon-button style="color: white;">
+        <mat-toolbar-row>
+            <button (click)="cajon.toggle()" mat-icon-button style="color: white;">
           <mat-icon>menu</mat-icon>
         </button>&nbsp;&nbsp;&nbsp;&nbsp;
-        <img src="../assets/Logo5.png" style="width: 100px;">
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <span style="color: white;">
+            <img src="../assets/Logo5.png" style="width: 100px;"> &nbsp;&nbsp;&nbsp;&nbsp;
+            <span style="color: white;">
           <h3>Tienda Online</h3>
         </span>
-        <span class="example-fill-remaining-space"></span>
-        <button mat-raised-button [matMenuTriggerFor]="menu">
+            <span class="example-fill-remaining-space"></span>
+            <button mat-raised-button [matMenuTriggerFor]="menu">
           <span style="margin-right: 10px" matBadgeOverlap="false"
                 matBadgePosition="below after"><img src="../assets/carrito.png" style="width: 25px; margin-bottom: -5px;">&nbsp;&nbsp;&nbsp;Compras</span>
         </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item>Lista de productos:</button>
-          <button mat-menu-item>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item>Lista de productos:</button>
+                <button mat-menu-item>
             <strong>Subtotal:</strong>
           </button>
-          <button mat-menu-item>
+                <button mat-menu-item>
             <strong>Total:</strong>
           </button>
-          <a mat-menu-item routerLink="/proceso_compra">
-            <mat-icon>shopping_cart</mat-icon>
-            Terminar compra</a>
-        </mat-menu>
-      </mat-toolbar-row>
+                <a mat-menu-item routerLink="/proceso_compra">
+                    <mat-icon>shopping_cart</mat-icon>
+                    Terminar compra</a>
+            </mat-menu>
+        </mat-toolbar-row>
     </mat-toolbar>
     <mat-sidenav-container class="contenido">
-      <mat-sidenav style="min-width: 300px;" #cajon opened mode="side">
-        <mat-nav-list>
-          <div *ngIf="administrador">
-          <p style="margin-left: 4px;">Administrador</p>
-          <a mat-list-item routerLink="/productos">
-            <mat-icon color="primary">list_alt</mat-icon>
-            Productos
-          </a>
-          <a mat-list-item routerLink="/ventas">
-            <mat-icon color="primary">local_shipping</mat-icon>
-            Ventas
-          </a>
-        </div>
-          <mat-divider></mat-divider>
-          <p style="margin-left: 4px;">Menú</p>
-          <a mat-list-item routerLink="/tienda">
-            <mat-icon color="primary">store</mat-icon>
-            Ver tienda
-          </a>
-          <mat-divider></mat-divider>
-        </mat-nav-list>
-      </mat-sidenav>
-      <mat-sidenav-content class="padding-10">
-        <router-outlet></router-outlet>
-      </mat-sidenav-content>
+        <mat-sidenav style="min-width: 300px;" #cajon opened mode="side">
+            <mat-nav-list>
+                <div *ngIf="administrador">
+                    <p style="margin-left: 4px;">Administrador</p>
+                    <a mat-list-item routerLink="/productos">
+                        <mat-icon color="primary">list_alt</mat-icon>
+                        Productos
+                    </a>
+                    <a mat-list-item routerLink="/ventas">
+                        <mat-icon color="primary">local_shipping</mat-icon>
+                        Ventas
+                    </a>
+                </div>
+                <mat-divider></mat-divider>
+                <p style="margin-left: 4px;">Menú</p>
+                <a mat-list-item routerLink="/tienda">
+                    <mat-icon color="primary">store</mat-icon>
+                    Ver tienda
+                </a>
+                <mat-divider></mat-divider>
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content class="padding-10">
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
     </mat-sidenav-container>
-  </div>
-  
+    <div class="poli">
+        <a class="to" [routerLink]="['aviso']" style="margin: 10px;">Aviso de privacidad  </a>
+        <a>|</a>
+        <a class="to" [routerLink]="['contacto']" style="margin: 10px;">Contactanos</a>
+    </div>

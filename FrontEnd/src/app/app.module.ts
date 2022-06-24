@@ -15,7 +15,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatInputModule} from "@angular/material/input";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {FormsModule} from "@angular/forms";
-import {MatCardMdImage, MatCardModule} from "@angular/material/card";
+import { MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatBadgeModule} from "@angular/material/badge";
@@ -30,6 +30,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { TableroProductosComponent } from './pages/cliente/tablero-productos/tablero-productos.component';
 import { CaracteristicaProductosComponent } from './pages/cliente/caracteristica-productos/caracteristica-productos.component';
 import { ProcesoComprasComponent } from './pages/cliente/proceso-compras/proceso-compras.component';
+import { AvisoComponent } from './pages/aviso/aviso.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ProcesoComprasComponent } from './pages/cliente/proceso-compras/proceso
     LoginComponent,
     TableroProductosComponent,
     CaracteristicaProductosComponent,
-    ProcesoComprasComponent
+    ProcesoComprasComponent,
+    AvisoComponent
 
   ],
   imports: [
@@ -45,7 +47,7 @@ import { ProcesoComprasComponent } from './pages/cliente/proceso-compras/proceso
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSidenavModule,
-    MatCardMdImage,
+
     MatSliderModule,
     MatToolbarModule,
     MatListModule,
@@ -55,7 +57,7 @@ import { ProcesoComprasComponent } from './pages/cliente/proceso-compras/proceso
     MatExpansionModule,
     MatTableModule,
     MatDialogModule,
-    MatSnackBarModule, 
+    MatSnackBarModule,
     MatCardModule,
     MatMenuModule,
     MatGridListModule,
