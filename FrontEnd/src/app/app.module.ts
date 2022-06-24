@@ -31,13 +31,50 @@ import { TableroProductosComponent } from './pages/cliente/tablero-productos/tab
 import { CaracteristicaProductosComponent } from './pages/cliente/caracteristica-productos/caracteristica-productos.component';
 import { ProcesoComprasComponent } from './pages/cliente/proceso-compras/proceso-compras.component';
 
+
+import {A11yModule} from '@angular/cdk/a11y';
+import {CdkAccordionModule} from '@angular/cdk/accordion';
+import {ClipboardModule} from '@angular/cdk/clipboard';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {PortalModule} from '@angular/cdk/portal';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import {CdkStepperModule} from '@angular/cdk/stepper';
+import {CdkTableModule} from '@angular/cdk/table';
+import {CdkTreeModule} from '@angular/cdk/tree';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSortModule} from '@angular/material/sort';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatTreeModule} from '@angular/material/tree';
+
+import { AdminComponent } from './pages/admin/admin/admin.component';
+import { DetVentasComponent } from './pages/admin/det-ventas/det-ventas.component';
+import { ProductosComponent } from './pages/admin/productos/productos.component';
+import { VentasComponent } from './pages/admin/ventas/ventas.component';
+import { AddProductoComponent } from './pages/admin/add-producto/add-producto.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     TableroProductosComponent,
     CaracteristicaProductosComponent,
-    ProcesoComprasComponent
+    ProcesoComprasComponent,
+    AdminComponent,
+    DetVentasComponent,
+    ProductosComponent,
+    VentasComponent,
+    AddProductoComponent
 
   ],
   imports: [
@@ -45,7 +82,6 @@ import { ProcesoComprasComponent } from './pages/cliente/proceso-compras/proceso
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSidenavModule,
-    MatCardMdImage,
     MatSliderModule,
     MatToolbarModule,
     MatListModule,
@@ -65,9 +101,32 @@ import { ProcesoComprasComponent } from './pages/cliente/proceso-compras/proceso
     FormsModule,
     MatBadgeModule,
     MatStepperModule,
-    MatProgressBarModule
-
-
+    MatProgressBarModule,
+    A11yModule,
+    CdkAccordionModule,
+    ClipboardModule,
+    DragDropModule,
+    PortalModule,
+    ScrollingModule,
+    CdkStepperModule,
+    CdkTableModule,
+    CdkTreeModule,
+    MatAutocompleteModule,
+    MatBottomSheetModule,
+    MatButtonToggleModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatDividerModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    MatSortModule,
+    MatTabsModule,
+    MatTooltipModule,
+    MatTreeModule,
+    MatRippleModule
 
 
 

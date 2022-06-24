@@ -1,0 +1,50 @@
+<div class="container">
+
+    <div class="example-container">
+
+        <mat-form-field appearance="fill">
+            <mat-label>Nombre Producto</mat-label>
+            <input matInput #input placeholder="Laptop">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Categoria</mat-label>
+            <mat-select>
+                <mat-option value="option">Gamer</mat-option>
+                <mat-option value="option">Accesorios</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </div>
+
+
+
+    <button type="button" mat-raised-button (click)="fileInput.click()">Seleccionar imagen</button>
+    <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+
+    <div class="example-container">
+
+        <mat-form-field appearance="fill">
+            <mat-label>Cantidad en el almacen</mat-label>
+            <input matInput #input placeholder="100" type="number">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Precio Producto</mat-label>
+            <input matInput #input placeholder="20000" type="number">
+        </mat-form-field>
+
+        
+    </div>
+    <div class="example-container"> 
+        
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Descripcion Porducto</mat-label>
+            <textarea matInput placeholder="El producto tiene..."></textarea>
+        </mat-form-field>
+        
+    </div>
+    <button class="enviar" mat-raised-button color="primary" routerLink="/productos">Agregar</button>
+    <button mat-raised-button color="warn" routerLink="/productos">Cancelar</button>
+
+</div>
