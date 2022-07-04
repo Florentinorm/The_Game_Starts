@@ -23,23 +23,31 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './pages/login/login.component';
 import { TableroProductosComponent } from './pages/cliente/tablero-productos/tablero-productos.component';
-import { CaracteristicaProductosComponent } from './pages/cliente/caracteristica-productos/caracteristica-productos.component';
 import { ProcesoComprasComponent } from './pages/cliente/proceso-compras/proceso-compras.component';
 import { AvisoComponent } from './pages/aviso/aviso.component';
+import { TerminarCompraComponent } from './pages/cliente/terminar-compra/terminar-compra.component';
+import { DetalleDeProductoComponent } from './pages/cliente/detalle-de-producto/detalle-de-producto.component';
+
+
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     TableroProductosComponent,
-    CaracteristicaProductosComponent,
     ProcesoComprasComponent,
-    AvisoComponent
+    AvisoComponent,
+    TerminarCompraComponent,
+    DetalleDeProductoComponent,
 
   ],
   imports: [
