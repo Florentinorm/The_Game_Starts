@@ -11,7 +11,7 @@ const con = require('./config/db');
      return res.send({ error: true, message: 'hello' })
  });
 
- // app.use('/api/admin', require('./routes/admin.route'));
+ app.use('/api/admin', require('./routes/admin.route'));
  // app.use('/api/cliente', require('./routes/cliente.route'));
  // app.use('/api/login', require('./routes/login.route'));
 

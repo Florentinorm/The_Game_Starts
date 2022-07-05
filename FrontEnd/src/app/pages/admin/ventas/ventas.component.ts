@@ -18,7 +18,7 @@ const ventaData: Venta[] = [
   styleUrls: ['./ventas.component.css']
 })
 export class VentasComponent implements OnInit {
-  displayedColumns: string[] = ['nomUsuario', 'name', 'canVenta', 'totalVenta'];
+  displayedColumns: string[] = ['nomUsuario', 'name', 'canVenta', 'totalVenta', 'editar', 'eliminar'];
   dataSource = new MatTableDataSource(ventaData);
 
   applyFilter(event: Event) {
