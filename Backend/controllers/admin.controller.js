@@ -4,7 +4,7 @@ exports.obtenerProductos = async (req, res, next) => {
     try {
         const result = await pool.execute(`SELECT id_producto, nomProducto, desProducto, cantidad,
          precio, id_usuario, id_Estatus, id_catProducto, imgProducto FROM productos 
-         WHERE id_producto = ?`,[id_producto]);
+         WHERE id_producto = ?`, [id_producto]);
         res.status(200).json(result);
     } catch (err) {
         if (!err.statusCode) {
@@ -42,7 +42,7 @@ exports.crearProductos = async (req, res, next) => {
         const result = await pool.execute(`INSERT INTO productos(id_producto, nomProducto,
             desProducto, cantidad, precio, id_usuario, id_Estatus, id_catProducto, imgProducto)
          VALUES ( "", ?, ?, ?, ?, ?, ?, ?, ?)`,
-         [nomProducto, desProducto, cantidad, precio, id_usuario, id_Estatus, id_catProducto, imgProducto]);
+            [nomProducto, desProducto, cantidad, precio, id_usuario, id_Estatus, id_catProducto, imgProducto]);
         res.status(200).json(result);
     } catch (err) {
         if (!err.statusCode) {
@@ -51,6 +51,7 @@ exports.crearProductos = async (req, res, next) => {
         next(err);
     }
 }
+
 exports.editarProductos = async (req, res, next) => {
     console.log(req.body);
     id_producto = req.body.id_producto;
@@ -66,8 +67,8 @@ exports.editarProductos = async (req, res, next) => {
         const result = await pool.execute(`UPDATE productos SET nomProducto = ?, desProducto = ? ,
         cantidad = ?, precio = ? , id_usuario = ? , id_Estatus = ? , id_catProducto = ? , imgProducto = ? 
         WHERE id_producto = ?`,
-         [nomProducto, desProducto, cantidad, precio, id_usuario, id_Estatus, 
-            id_catProducto, imgProducto, id_producto]);
+            [nomProducto, desProducto, cantidad, precio, id_usuario, id_Estatus,
+                id_catProducto, imgProducto, id_producto]);
         res.status(200).json(result);
     } catch (err) {
         if (!err.statusCode) {
@@ -76,10 +77,11 @@ exports.editarProductos = async (req, res, next) => {
         next(err);
     }
 }
+
 exports.eliminarProductos = async (req, res, next) => {
     id_producto = req.params.id;
     try {
-        const result = await pool.execute(`DELETE FROM productos WHERE id_producto = ?`,[id_producto]);
+        const result = await pool.execute(`DELETE FROM productos WHERE id_producto = ?`, [id_producto]);
         res.status(200).json(result);
     } catch (err) {
         if (!err.statusCode) {
@@ -107,7 +109,7 @@ exports.obtenerUsuario = async (req, res, next) => {
     id_usuario = req.params.id;
     try {
         const result = await pool.execute(`SELECT id_usuario, nombre, apellido_paterno,
-         apellido_materno, password,correo, usuario, id_rol, id_Estatus FROM usuario WHERE id_usuario = ?`,[id_usuario]);
+         apellido_materno, password,correo, usuario, id_rol, id_Estatus FROM usuario WHERE id_usuario = ?`, [id_usuario]);
         res.status(200).json(result);
 
     } catch (err) {
@@ -133,8 +135,8 @@ exports.editarUsuario = async (req, res, next) => {
         const result = await pool.execute(`UPDATE usuario SET nombre = ? , apellido_paterno = ? , 
         apellido_materno = ? , password = ? , correo = ? , usuario = ? , id_rol = ? , id_Estatus = ? 
         WHERE id_usuario = ?`,
-         [nombre, apellido_paterno, apellido_materno, password, correo, usuario, 
-            id_rol, id_Estatus, id_usuario]);
+            [nombre, apellido_paterno, apellido_materno, password, correo, usuario,
+                id_rol, id_Estatus, id_usuario]);
         res.status(200).json(result);
     } catch (err) {
         if (!err.statusCode) {
@@ -147,7 +149,7 @@ exports.editarUsuario = async (req, res, next) => {
 exports.eliminarUsuario = async (req, res, next) => {
     id_usuario = req.params.id;
     try {
-        const result = await pool.execute(`DELETE FROM usuario WHERE id_usuario = ?`,[id_usuario]);
+        const result = await pool.execute(`DELETE FROM usuario WHERE id_usuario = ?`, [id_usuario]);
         res.status(200).json(result);
 
     } catch (err) {
