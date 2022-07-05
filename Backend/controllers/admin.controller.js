@@ -34,6 +34,31 @@ exports.crearProductos = async (req, res, next) => {
         next(err);
     }
 }
+exports.editarProductos = async (req, res, next) => {
+    console.log(req.body);
+    id_producto = req.body.id_producto;
+    nomProducto = req.body.nomProducto;
+    desProducto = req.body.desProducto;
+    cantidad = req.body.cantidad;
+    precio = req.body.precio;
+    id_usuario = req.body.id_usuario;
+    id_Estatus = req.body.id_Estatus;
+    id_catProducto = req.body.id_catProducto;
+    imgProducto = req.body.imgProducto;
+    try {
+        const result = await pool.execute(`UPDATE productos SET nomProducto = ?, desProducto = ? ,
+        cantidad = ?, precio = ? , id_usuario = ? , id_Estatus = ? , id_catProducto = ? , imgProducto = ? 
+        WHERE id_producto = ?`,
+         [nomProducto, desProducto, cantidad, precio, id_usuario, id_Estatus, 
+            id_catProducto, imgProducto, id_producto]);
+        res.status(200).json(result);
+    } catch (err) {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+        next(err);
+    }
+}
 exports.eliminarProductos = async (req, res, next) => {
     id_producto = req.params.id;
     try {
@@ -53,6 +78,32 @@ exports.obtenerUsuario = async (req, res, next) => {
          apellido_materno, password,correo, usuario, id_rol, id_Estatus FROM usuario`);
         res.status(200).json(result);
 
+    } catch (err) {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+        next(err);
+    }
+}
+
+exports.editarUsuario = async (req, res, next) => {
+    console.log(req.body);
+    id_usuario = req.body.id_usuario;
+    nombre = req.body.nombre;
+    apellido_paterno = req.body.apellido_paterno;
+    apellido_materno = req.body.apellido_materno;
+    password = req.body.password;
+    correo = req.body.correo;
+    usuario = req.body.usuario;
+    id_rol = req.body.id_rol;
+    id_Estatus = req.body.id_Estatus;
+    try {
+        const result = await pool.execute(`UPDATE usuario SET nombre = ? , apellido_paterno = ? , 
+        apellido_materno = ? , password = ? , correo = ? , usuario = ? , id_rol = ? , id_Estatus = ? 
+        WHERE id_usuario = ?`,
+         [nombre, apellido_paterno, apellido_materno, password, correo, usuario, 
+            id_rol, id_Estatus, id_usuario]);
+        res.status(200).json(result);
     } catch (err) {
         if (!err.statusCode) {
             err.statusCode = 500;
