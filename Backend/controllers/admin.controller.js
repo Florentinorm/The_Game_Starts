@@ -1,5 +1,21 @@
 const pool = require('../config/db');
+
 exports.obtenerProductos = async (req, res, next) => {
+    try {
+        const result = await pool.execute(`SELECT id_producto, nomProducto, desProducto, cantidad,
+         precio, id_usuario, id_Estatus, id_catProducto, imgProducto FROM productos 
+         WHERE id_producto = ?`,[id_producto]);
+        res.status(200).json(result);
+    } catch (err) {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+        next(err);
+    }
+}
+
+exports.obtenerProductosId = async (req, res, next) => {
+    id_producto = req.params.id;
     try {
         const result = await pool.execute(`SELECT id_producto, nomProducto, desProducto, cantidad,
          precio, id_usuario, id_Estatus, id_catProducto, imgProducto FROM productos`);
@@ -11,6 +27,7 @@ exports.obtenerProductos = async (req, res, next) => {
         next(err);
     }
 }
+
 exports.crearProductos = async (req, res, next) => {
     console.log(req.body);
     nomProducto = req.body.nomProducto;
@@ -76,6 +93,21 @@ exports.obtenerUsuario = async (req, res, next) => {
     try {
         const result = await pool.execute(`SELECT id_usuario, nombre, apellido_paterno,
          apellido_materno, password,correo, usuario, id_rol, id_Estatus FROM usuario`);
+        res.status(200).json(result);
+
+    } catch (err) {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+        next(err);
+    }
+}
+
+exports.obtenerUsuario = async (req, res, next) => {
+    id_usuario = req.params.id;
+    try {
+        const result = await pool.execute(`SELECT id_usuario, nombre, apellido_paterno,
+         apellido_materno, password,correo, usuario, id_rol, id_Estatus FROM usuario WHERE id_usuario = ?`,[id_usuario]);
         res.status(200).json(result);
 
     } catch (err) {
