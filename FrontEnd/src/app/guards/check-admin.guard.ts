@@ -18,7 +18,6 @@ export class CheckAdminGuard implements CanActivate {
     return this.authSvc.isUserAdmin$.pipe(
       take(1),
       tap((canEdit) => {
-        console.log(canEdit)
         if(canEdit === false){
           this.router.navigate(["/cliente"]);
             Swal.fire({

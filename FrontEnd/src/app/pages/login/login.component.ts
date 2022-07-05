@@ -31,7 +31,6 @@ loginForm = this.fb.group({
   if (this.loginForm.invalid) return;  
   // obtener los datos del formulario
   const formValue = this.loginForm.value;
-  console.log(formValue)
   this.authService.login(formValue)
   .subscribe( (user) => {
       //verifica si existe un error con el proceso del loguin

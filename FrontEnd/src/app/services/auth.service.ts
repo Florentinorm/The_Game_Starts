@@ -38,7 +38,6 @@ export class AuthService {
   ) {
     //se ejecutará el checktoken
     this.checkToken();
-    console.log(this.isUserLoggedIn$.value);
   }
 
   //método que devolverá un observable y será de tipo User
@@ -68,7 +67,6 @@ export class AuthService {
       .post<UserResponse>(`${environment.API_URL}/login`, userData)
       .pipe(
         map((user: UserResponse) => {
-          console.log(user)
           //si no ocurrio un errror. 0 indica que no hay errores
           if (user.code === 0) {
             //this.user.next(user.idUsuario);
@@ -102,6 +100,7 @@ export class AuthService {
     localStorage.removeItem('token'); //removemos el token
     this.token.next(''); // seteamos la variable del observable a vacio
     this.isUserLoggedIn$.next(false);
+    this.isUserAdmin$.next(false);
     this.router.navigate(['login']); //redirigimos al login
   }
 
