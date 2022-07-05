@@ -1,13 +1,71 @@
-<!-- register.component.html -->
-
-<div class="register">
-    <form class="custom-form" method="post">
-        <h1>Register</h1>
-        <input type="text" name="text" placeholder="Nombre" required="required" />
-        <input type="text" name="text" placeholder="Apellidos" required="required" />
-        <input type="email" name="email" placeholder="Correo" required="required" />
-        <input type="password" name="password" placeholder="Contraseña" required="required" />
-        <input type="password" name="password" placeholder="Repita la contraseña" required="required" />
-        <button type="submit">Register</button>
-    </form>
+<div class="login-form">
+    <mat-card>
+      <mat-card-content>
+        <h1>Registro</h1>
+          <form [formGroup]="signupForm" (ngSubmit)="signup()" novalidate>
+            <mat-form-field>
+              <mat-label>nombre</mat-label>
+              <input matInput  formControlName="name" maxlength="20" />
+              <mat-error *ngIf="isValidField('name')">
+                {{ getErrorMessage('name') }}
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>apellido paterno</mat-label>
+              <input matInput formControlName="apellidopaterno" maxlength="20"/>
+              <mat-error *ngIf="isValidField('apellidopaterno')">
+                {{ getErrorMessage('apellidopaterno') }}
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>apellido materno</mat-label>
+              <input matInput  formControlName="apellidomaterno" maxlength="20"/>
+              <mat-error *ngIf="isValidField('apellidomaterno')">
+                {{ getErrorMessage('apellidomaterno') }}
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Ex. Jon@gmail.com" formControlName="email" maxlength="50"/>
+              <mat-error *ngIf="isValidField('email')">
+                {{ getErrorMessage('email') }}
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Password</mat-label>
+              <input
+                matInput
+                type="password"
+                formControlName="password"
+                maxlength="100"
+              />
+              <mat-error *ngIf="isValidField('password')">
+                {{ getErrorMessage('password') }}
+              </mat-error>
+            </mat-form-field>
+            <br>
+            <br>
+            <!--SE DESACTIVA EL BOTÓN SI EL FORMULARIO ES INVÁLIDO-->
+            <button
+              color="accent"
+              [disabled]="!signupForm.valid"
+              mat-raised-button
+              type="submit"
+            >
+              <span>Sign up</span>
+            </button>
+          </form>
+          <br>
+          <br>
+          <br>
+        <nav>
+            <div style="text-align: center;">
+                <a routerLink="/login">
+                ¿Ya tienes una cuenta?
+                </a>
+            </div>
+        </nav>
+        </mat-card-content>
+      </mat-card>
 </div>
+    
