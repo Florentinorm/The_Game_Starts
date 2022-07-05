@@ -22,8 +22,8 @@ exports.crearProductos = async (req, res, next) => {
     id_catProducto = req.body.id_catProducto;
     imgProducto = req.body.imgProducto;
     try {
-        const result = await pool.execute(`INSERT INTO productos(id_producto, nomProducto, desProducto, cantidad, 
-            precio, id_usuario, id_Estatus, id_catProducto, imgProducto)
+        const result = await pool.execute(`INSERT INTO productos(id_producto, nomProducto,
+            desProducto, cantidad, precio, id_usuario, id_Estatus, id_catProducto, imgProducto)
          VALUES ( "", ?, ?, ?, ?, ?, ?, ?, ?)`,
          [nomProducto, desProducto, cantidad, precio, id_usuario, id_Estatus, id_catProducto, imgProducto]);
         res.status(200).json(result);
@@ -51,6 +51,20 @@ exports.obtenerUsuario = async (req, res, next) => {
     try {
         const result = await pool.execute(`SELECT id_usuario, nombre, apellido_paterno,
          apellido_materno, password,correo, usuario, id_rol, id_Estatus FROM usuario`);
+        res.status(200).json(result);
+
+    } catch (err) {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+        next(err);
+    }
+}
+
+exports.eliminarUsuario = async (req, res, next) => {
+    id_usuario = req.params.id;
+    try {
+        const result = await pool.execute(`DELETE FROM usuario WHERE id_usuario = ?`,[id_usuario]);
         res.status(200).json(result);
 
     } catch (err) {
