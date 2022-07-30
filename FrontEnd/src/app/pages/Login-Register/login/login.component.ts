@@ -11,6 +11,9 @@ import { Router } from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
+  hidePwd = true;
+  hideConfirmPwd = true;
+  
   constructor(
     private authService: AuthService,
     private router: Router,
