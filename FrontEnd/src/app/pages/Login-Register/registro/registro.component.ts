@@ -13,7 +13,9 @@ import { AuthService } from "src/app/services/auth.service";
 export class RegistroComponent implements OnInit {
 
   signupForm!: FormGroup; //hace referencia a nuestro fomulario de registro del html
-
+  hidePwd = true;
+  hideConfirmPwd = true;
+  
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
@@ -24,16 +26,22 @@ export class RegistroComponent implements OnInit {
   createFormGroup(): FormGroup {
     //retornaremos un FormGroup con las validaciones correspondientes
     return new FormGroup({
-      name: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
-      apellidopaterno: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
-      apellidomaterno: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
-      email: new FormControl("", [Validators.required, Validators.email, Validators.minLength(5), Validators.maxLength(50)]),
+      name: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(20),  this.noWhitespaceValidator ]),
+      apellidopaterno: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(20), this.noWhitespaceValidator ]),
+      apellidomaterno: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(20), this.noWhitespaceValidator  ]),
+      email: new FormControl("", [Validators.required, Validators.email, Validators.minLength(5), Validators.maxLength(50), this.noWhitespaceValidator]),
       password: new FormControl("", [
         Validators.required,
         Validators.minLength(7),
-        Validators.maxLength(100)
+        Validators.maxLength(100),
+        this.noWhitespaceValidator
       ])
     });
+  }
+  public noWhitespaceValidator(control: FormControl) {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { 'whitespace': true };
   }
 
   //funcion que realizará el signup, una ves capturado el evento ngSubmit en el html
@@ -60,6 +68,8 @@ export class RegistroComponent implements OnInit {
         message = 'Excede el máximo de caracteres';
       } else if (form.hasError('email')){
         message = 'Email incorrecto';
+      } else if (form.hasError('whitespace')){
+        message = 'Solo se acepta caracteres sin espacio'
       }
     }
     return message;

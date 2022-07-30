@@ -12,6 +12,6 @@ export interface UserResponse {
   message: string;
   token: string;
   code: number;
-  idUsuario: number;
+  idRol: number;
 }
 

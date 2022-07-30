@@ -22,7 +22,7 @@ ngOnInit(): void {
 
 loginForm = this.fb.group({
   email : ['', [Validators.required, Validators.email, Validators.minLength(5), Validators.maxLength(50)]],
-  password : ['', [Validators.required, Validators.minLength(7), Validators.maxLength(100)]]
+  password : ['', [Validators.required, Validators.minLength(7), Validators.maxLength(100) ]]
 });
 
 

@@ -19,14 +19,6 @@ router.post(
       //verificamos que sea un correo electrónico
       .isEmail()
       .withMessage('Please enter a valid email.')
-      //verificamos si ya existe un correo ingresado
-      .custom(async (email) => {
-        const user = await User.find(email);
-        //si usuario es mayor a 0
-        if (user[0].length > 0) {
-          return Promise.reject('Email address already exist!');
-        }
-      })
       //normalizamos el  email, lo convierte a minúsculas
       .normalizeEmail(),
       //se valida el password con una longitud mínima de 7
@@ -35,6 +27,11 @@ router.post(
   authController.signup
 );
 
-router.post('/login', authController.iniciarSesion);
+router.post('/login', authController.login);
+
+//recuperar contraseña
+router.put('/forgot-password', authController.forgotPassword);
+//crear nueva contraseña
+router.put('/new-password', authController.createNewPassword);
 
 module.exports = router;

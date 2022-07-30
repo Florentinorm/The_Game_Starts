@@ -19,7 +19,8 @@ export class CheckAdminGuard implements CanActivate {
       take(1),
       tap((canEdit) => {
         if(canEdit === false){
-          this.router.navigate(["/cliente"]);
+          console.log(canEdit)
+          this.router.navigate(["/login"]);
             Swal.fire({
                 title: 'Acceso denegado',
                 text: 'No eres un administrador'

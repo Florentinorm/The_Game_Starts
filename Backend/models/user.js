@@ -17,14 +17,18 @@ module.exports = class User {
 
   //busca un usuario en función al email
   static find(email) {
-    //retorna una sentencia sql
-    return db.execute('SELECT * FROM users WHERE email = ?', [email]);
+    try {
+      //retorna una sentencia sql
+      return db.execute('SELECT * FROM users WHERE email = ?', [email]);
+    } catch (error) {
+      return 1;
+    }
   }
 
     //busca un usuario en función al email
-  static findToken(token) {
+  static findToken(resetToken) {
     //retorna una sentencia sql
-    return db.execute('SELECT * FROM users WHERE resetToken = ?', [token]);
+    return db.execute('SELECT * FROM users WHERE resetToken = ?', [resetToken]);
   }
 
   //guarda el nuevo usuario
@@ -40,7 +44,6 @@ module.exports = class User {
     //actualiza el nuevo usuario con el token
     static update(idUser, User) {
       //retirna una sentencia sql
-      console.log(User)
       return db.execute(
         //para evitar la injeccion sql especificamos los argumentos como ?
         `update users set resetToken = '${User}' WHERE idUser = '${idUser}';`

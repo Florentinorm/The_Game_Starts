@@ -37,11 +37,12 @@ export class AuthService {
     private router: Router
   ) {
     //se ejecutará el checktoken
-    this.checkToken();
+    //this.checkToken();
   }
 
   //método que devolverá un observable y será de tipo User
   signup(user: Omit<User, 'id'>): Observable<User> {
+    console.log(user)
     //retornaremos las solicitud http
     return (
       this.http
@@ -49,7 +50,7 @@ export class AuthService {
         .post<User>(`${environment.API_URL}/signup`, user, this.httpOptions)
         .pipe(
           first(),
-          catchError(this.errorHandlerService.handleError<User>('signup')) //obtenemos el mensaje arrojado desde el servidor
+          catchError((error)=> this.handlerError(error)) //obtenemos el mensaje arrojado desde el servidor
         )
     );
   }
@@ -72,12 +73,14 @@ export class AuthService {
             //this.user.next(user.idUsuario);
             this.token.next(user.token); //le decimos que continue, le pasamos el token del user
             this.SaveLocalStorage(user.token); //método para guardar el token
-            if (user.idUsuario === 2) {
+            console.log(user.idRol)
+            if (user.idRol === 2) {
               this.isUserAdmin$.next(true);
               this.isUserLoggedIn$.next(true);
               this.router.navigate(['admin']);
-            } else if (user.idUsuario === 1) {
+            } else if (user.idRol === 1) {
               this.isUserLoggedIn$.next(true);
+              console.log(this.isUserLoggedIn$)
               this.router.navigate(['cliente']);
             } else {
               Swal.fire({
@@ -88,12 +91,8 @@ export class AuthService {
           }
           return user;
         }),
-        catchError(
-          this.errorHandlerService.handleError<{
-            token: string;
-          }>('login')
-        )
-      );
+        catchError((error)=> this.handlerError(error))
+    );
   }
 
   logout() {
@@ -123,13 +122,16 @@ export class AuthService {
     localStorage.setItem('token', token); //guardamos el token
   }
 
-  //mostrar los errores
-  handlerError(error: any): Observable<never> {
-    let errorMessage = 'Ocurrió un error';
-
-    if (error.error) errorMessage = `${error.error.message}`;
+  //obtenemos el error del backend y lo mostramos en angular
+  handlerError(error: any): Observable<never>{
+    let errorMessage = "Ocurrio un error";
+  
+   if(error.error)  errorMessage = `${error.error.message}`;
     else errorMessage = `${error.message}`;
-
+    Swal.fire({
+      title: 'Ocurrió un error',
+      text: errorMessage,
+    });
     return throwError(errorMessage);
   }
 }

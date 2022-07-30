@@ -13,11 +13,12 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
     if (this.authService.isUserLoggedIn$.value === false) {
+      console.log('entro cliente')
         Swal.fire({
             title: 'Acceso denegado',
             text: 'Tiene que acceder mediante un login'
           });
-          this.router.navigate(["cliente"]);
+          this.router.navigate(["login"]);
           return false;
     } else {
       return true;

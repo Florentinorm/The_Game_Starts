@@ -1,5 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
@@ -13,13 +13,21 @@ import {MatGridListModule} from '@angular/material/grid-list';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './pages/login/login.component';
-import { RegistroComponent } from './pages/registro/registro.component';
+import { LoginComponent } from './pages/Login-Register/login/login.component';
+import { RegistroComponent } from './pages/Login-Register/registro/registro.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { ClienteComponent } from './pages/cliente/cliente.component';
 import { NavigationComponent } from './pages/navigation/navigation.component';
 import { AuthInterceptorService } from "./services/auth-interceptor.service";
 import { LoadingInterceptor } from "./interceptors/loading-interceptor";
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
+import { CreateNewPasswordComponent } from './pages/Login-Register/create-new-password/create-new-password.component';
+import { ForgotPasswordComponent } from "./pages/Login-Register/forgot-password/forgot-password.component";
+
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+// Import library module
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -28,7 +36,9 @@ import { LoadingInterceptor } from "./interceptors/loading-interceptor";
     RegistroComponent,
     AdminComponent,
     ClienteComponent,
-    NavigationComponent
+    NavigationComponent,
+    ForgotPasswordComponent,
+    CreateNewPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -42,8 +52,12 @@ import { LoadingInterceptor } from "./interceptors/loading-interceptor";
     MatToolbarModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatGridListModule
+    MatGridListModule,
+    MatProgressSpinnerModule,
+    BrowserAnimationsModule,
+    NgxSpinnerModule,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true} //importamos el intercetor
   ],
