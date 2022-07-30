@@ -63,6 +63,8 @@ import { ProductosComponent } from './pages/admin/productos/productos.component'
 import { VentasComponent } from './pages/admin/ventas/ventas.component';
 import { AddProductoComponent } from './pages/admin/add-producto/add-producto.component';
 
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -126,7 +128,8 @@ import { AddProductoComponent } from './pages/admin/add-producto/add-producto.co
     MatTabsModule,
     MatTooltipModule,
     MatTreeModule,
-    MatRippleModule
+    MatRippleModule,
+    HttpClientModule,
 
 
 

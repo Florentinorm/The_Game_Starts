@@ -1,12 +1,13 @@
 const pool = require('../config/db');
 
 /**
- * Metodo obtener productos
+ * Metodo obtener producto por id
  * 
- * @param {result} res resultado de la consulta
+ * @param {params.id} req atrapar el id del producto que fue seleccionado
+ * @param {result} res Regresa el resultado de la consulta
  * @param {err} next Error
  */
-exports.obtenerProductos = async (req, res, next) => {
+exports.obtenerProductosId = async (req, res, next) => {
     try {
         const result = await pool.execute(`SELECT id_producto, nomProducto, desProducto, cantidad,
          precio, id_usuario, id_Estatus, id_catProducto, imgProducto FROM productos 
@@ -20,14 +21,14 @@ exports.obtenerProductos = async (req, res, next) => {
     }
 }
 
+
 /**
- * Metodo obtener producto por id
+ * Metodo obtener productos
  * 
- * @param {params.id} req atrapar el id del producto que fue seleccionado
- * @param {result} res Regresa el resultado de la consulta
+ * @param {result} res resultado de la consulta
  * @param {err} next Error
  */
-exports.obtenerProductosId = async (req, res, next) => {
+exports.obtenerProductos = async (req, res, next) => {
     id_producto = req.params.id;
     try {
         const result = await pool.execute(`SELECT id_producto, nomProducto, desProducto, cantidad,

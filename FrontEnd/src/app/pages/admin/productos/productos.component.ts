@@ -1,33 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { Producto } from '../models/producto';
 import {MatTableDataSource} from '@angular/material/table';
+import { AdminService } from '../service/admin.service';
 
-const ventaData: Producto[] = [
-  { idPro: 1, nomPro: 'Laptop', precio: 24000, cantidad: 2, descripcion: 'Equipo de computo gamer', idEstatus: 1, estatus: 'Activo', nomCat: 'Gamer', idCatPro: 1, idUsuario: 1},
-  { idPro: 2, nomPro: 'Teclado', precio: 600, cantidad: 10, descripcion: 'Equipo gamer', idEstatus: 1, estatus: 'Activo', nomCat: 'Gamer', idCatPro: 1, idUsuario: 1},
-  { idPro: 3, nomPro: 'Monitor', precio: 4000, cantidad: 10, descripcion: 'Equipo gamer', idEstatus: 1, estatus: 'Activo', nomCat: 'Gamer', idCatPro: 1, idUsuario: 1},
-  { idPro: 4, nomPro: 'Mouse', precio: 400, cantidad: 10, descripcion: 'Equipo gamer', idEstatus: 1, estatus: 'Activo', nomCat: 'Gamer', idCatPro: 1, idUsuario: 1},
-  { idPro: 5, nomPro: 'Computadora', precio: 19000, cantidad: 10, descripcion: 'Equipo de computo gamer', idEstatus: 1, estatus: 'Activo', idCatPro: 1, nomCat: '', idUsuario: 1},
-  { idPro: 6, nomPro: 'Memoria RAM', precio: 4000, cantidad: 10, descripcion: 'Equipo gamer', idEstatus: 1, estatus: 'Activo', nomCat: 'Gamer', idCatPro: 1, idUsuario: 1},
-  
-];
+
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.component.html',
   styleUrls: ['./productos.component.css']
 })
 export class ProductosComponent implements OnInit {
-
+  
+  constructor( private service: AdminService) { }
+  
+  productoData: Producto[]=[];
   displayedColumns: string[] = ['nomPro', 'precio', 'cantidad', 'estatus', 'editar', 'eliminar'];
-  dataSource = new MatTableDataSource(ventaData);
-
+  dataSource = new MatTableDataSource(this.productoData);
+  productos: any;
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  constructor() { }
 
   ngOnInit(): void {
+    this.dataProducto();
   }
-
+  
+  dataProducto(){
+    this.productos = this.service.producto();
+    console.log(this.productos);
+  }
 }
