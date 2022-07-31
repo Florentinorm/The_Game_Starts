@@ -30,10 +30,12 @@ exports.obtenerProductosId = async (req, res, next) => {
  */
 exports.obtenerProductos = async (req, res, next) => {
     id_producto = req.params.id;
+    console.log('entgro al back 2')
     try {
         const result = await pool.execute(`SELECT id_producto, nomProducto, desProducto, cantidad,
          precio, id_usuario, id_Estatus, id_catProducto, imgProducto FROM productos`);
-        res.status(200).json(result);
+        res.json(result[0]);
+        console.log(result)
     } catch (err) {
         if (!err.statusCode) {
             err.statusCode = 500;
