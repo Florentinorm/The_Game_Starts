@@ -34,8 +34,6 @@ export class CreateNewPasswordComponent implements OnInit {
     //console.log(this.token);
   }
 
-
-
     //método para las validaciones de los campos provenientes del formulario
     createFormGroup(): FormGroup {
       //retornaremos un FormGroup con las validaciones correspondientes
@@ -43,9 +41,16 @@ export class CreateNewPasswordComponent implements OnInit {
         password: new FormControl("", [
           Validators.required,
           Validators.minLength(7),
-          Validators.maxLength(100)
+          Validators.maxLength(100),
+          this.noWhitespaceValidator
         ])
       });
+    }
+
+    public noWhitespaceValidator(control: FormControl) {
+      const isWhitespace = (control.value || '').trim().length === 0;
+      const isValid = !isWhitespace;
+      return isValid ? null : { 'whitespace': true };
     }
 
     submit(): void {
@@ -78,7 +83,7 @@ export class CreateNewPasswordComponent implements OnInit {
           message = 'Excede el máximo de caracteres';
         } else if (form.hasError('email')){
           message = 'Email incorrecto';
-        } else if (form.hasError('pattern')){
+        } else if (form.hasError('whitespace')){
           message = 'Solo se acepta caracteres sin espacio'
         }
       }

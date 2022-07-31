@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import Swal from 'sweetalert2';
 import { AuthService } from "src/app/services/auth.service";
 import { Router } from "@angular/router";
@@ -27,7 +27,6 @@ loginForm = this.fb.group({
   email : ['', [Validators.required, Validators.email, Validators.minLength(5), Validators.maxLength(50)]],
   password : ['', [Validators.required, Validators.minLength(7), Validators.maxLength(100) ]]
 });
-
 
  onLogin() {
   // Se verifica que el formulario sea correcto
