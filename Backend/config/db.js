@@ -1,9 +1,9 @@
 var mysql = require('mysql2');
 var pool  = mysql.createPool({
   host: 'localhost',
-  user: 'DiegoJoan',
-  password: 'DiegoJoan589',
-  database: 'ecomerce'
+  user: 'root',
+  password: '',
+  database: 'ecommerce'
 });
 // connect to database
 

@@ -21,3 +21,7 @@ export interface ProductoID {
     nomCat: string;
     idUsuario: number;
 }
+export interface Categoria{
+    id_catProducto?: number;
+    nomCategoria?: string;
+}

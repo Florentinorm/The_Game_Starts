@@ -64,6 +64,9 @@ import { VentasComponent } from './pages/admin/ventas/ventas.component';
 import { AddProductoComponent } from './pages/admin/add-producto/add-producto.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { DetProComponent } from './pages/admin/det-pro/det-pro.component';
+
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -76,7 +79,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
     DetVentasComponent,
     ProductosComponent,
     VentasComponent,
-    AddProductoComponent
+    AddProductoComponent,
+    DetProComponent
 
   ],
   imports: [
@@ -130,7 +134,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
     MatTreeModule,
     MatRippleModule,
     HttpClientModule,
-
+    ReactiveFormsModule,
 
 
   ],

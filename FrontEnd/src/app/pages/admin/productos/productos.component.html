@@ -13,13 +13,7 @@
         <!-- nomPro Column -->
         <ng-container matColumnDef="nomPro">
             <th mat-header-cell *matHeaderCellDef> Nombre Producto </th>
-            <td mat-cell *matCellDef="let element"> {{element.nomPro}} </td>
-        </ng-container>
-
-        <!-- Producto Column -->
-        <ng-container matColumnDef="precio">
-            <th mat-header-cell *matHeaderCellDef> Precio </th>
-            <td mat-cell *matCellDef="let element"> ${{element.precio}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.nomProducto}} </td>
         </ng-container>
 
         <!-- canVenta Column -->
@@ -28,10 +22,16 @@
             <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
         </ng-container>
 
-        <!-- totalVenta Column -->
-        <ng-container matColumnDef="estatus">
-            <th mat-header-cell *matHeaderCellDef> Estatus </th>
-            <td mat-cell *matCellDef="let element"> {{element.estatus}} </td>
+        <!-- Producto Column -->
+        <ng-container matColumnDef="precio">
+            <th mat-header-cell *matHeaderCellDef> Precio </th>
+            <td mat-cell *matCellDef="let element"> ${{element.precio}} </td>
+        </ng-container>
+
+        <!-- Visualizar Column -->
+        <ng-container matColumnDef="detalles">
+            <th mat-header-cell *matHeaderCellDef> Detalles </th>
+            <td mat-cell *matCellDef="let element"><mat-icon>find_in_page</mat-icon></td>
         </ng-container>
 
         <!-- editar Column -->
@@ -43,7 +43,7 @@
         <!-- eliminar Column -->
         <ng-container matColumnDef="eliminar">
             <th mat-header-cell *matHeaderCellDef> Eliminar </th>
-            <td mat-cell *matCellDef="let element"> <mat-icon>delete_forever</mat-icon> </td>
+            <td mat-cell *matCellDef="let element"> <mat-icon (click)="eliminar(element.id_producto)">delete_forever</mat-icon> </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

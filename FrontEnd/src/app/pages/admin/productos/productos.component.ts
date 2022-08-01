@@ -13,12 +13,12 @@ import { Subject, takeUntil } from 'rxjs';
 export class ProductosComponent implements OnInit {
   private destroy$ = new Subject<any>();
   productos: Producto[] = []; //variable de tipo que esatrá vacia en arreglo
-
-  constructor( private service: AdminService, private adminSvc: AdminService) { }
+  previewSignsrc: any;
+  showPreviewSign = false;
+  constructor( private adminSvc: AdminService ) { }
   
-  productoData: Producto[]=[];
-  displayedColumns: string[] = ['nomPro', 'precio', 'cantidad', 'estatus', 'editar', 'eliminar'];
-  dataSource = new MatTableDataSource(this.productoData);
+  displayedColumns: string[] = ['nomPro', 'precio', 'cantidad', 'detalles', 'editar', 'eliminar'];
+  dataSource = new MatTableDataSource(this.productos);
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -28,14 +28,22 @@ export class ProductosComponent implements OnInit {
   ngOnInit(): void {
     this.listar();
   }
-
+  
   listar(){
     this.adminSvc.productos()
     .pipe(takeUntil(this.destroy$))
     .subscribe((productos: Producto[])=>{
-      console.log('entro 2')
       this.productos = productos;
+      this.dataSource = new MatTableDataSource(this.productos);
+    })
+  }
+
+  eliminar(id:number){
+    this.adminSvc.elimiarPro(id)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((productos: any)=>{
       console.log(productos);
+      this.listar();
     })
   }
 
