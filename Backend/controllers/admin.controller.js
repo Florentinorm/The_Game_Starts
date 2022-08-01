@@ -8,9 +8,31 @@ const pool = require('../database/db');
  * @param {err} next Error
  */
 exports.obtenerProductosId = async (req, res, next) => {
+    id_producto = req.body.id_producto;
     try {
         const result = await pool.execute(`SELECT id_producto, nomProducto, desProducto, cantidad,
          precio, id_usuario, id_Estatus, id_catProducto, imgProducto FROM productos 
+         WHERE id_producto = ?`, [id_producto]);
+        res.status(200).json(result);
+    } catch (err) {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+        next(err);
+    }
+}
+
+/**
+ * Metodo obtener img por id
+ * 
+ * @param {params.id} req atrapar el id del producto que fue seleccionado
+ * @param {result} res Regresa el resultado de la consulta
+ * @param {err} next Error
+ */
+ exports.obtenerImgId = async (req, res, next) => {
+    id_producto = req.body.id_producto;
+    try {
+        const result = await pool.execute(`SELECT imgProducto FROM productos 
          WHERE id_producto = ?`, [id_producto]);
         res.status(200).json(result);
     } catch (err) {
@@ -29,12 +51,30 @@ exports.obtenerProductosId = async (req, res, next) => {
  * @param {err} next Error
  */
 exports.obtenerProductos = async (req, res, next) => {
-    console.log('hola');
+
     try {
         const result = await pool.execute(`SELECT id_producto, nomProducto, desProducto, cantidad,
          precio, id_usuario, id_Estatus, id_catProducto, imgProducto FROM productos`);
-         console.log(result[0][0]);
-        res.status(200).json(result);
+        res.status(200).json(result[0]);
+    } catch (err) {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+        next(err);
+    }
+}
+
+/**
+ * Metodo obtener productos
+ * 
+ * @param {result} res resultado de la consulta
+ * @param {err} next Error
+ */
+exports.obtenerCategoriaPro = async (req, res, next) => {
+
+    try {
+        const result = await pool.execute(`SELECT id_catProducto, nomCategoria FROM catproducto`);
+        res.status(200).json(result[0]);
     } catch (err) {
         if (!err.statusCode) {
             err.statusCode = 500;
@@ -52,7 +92,6 @@ exports.obtenerProductos = async (req, res, next) => {
  * @param {err} next Error
  */
 exports.crearProductos = async (req, res, next) => {
-    console.log(req.body);
     nomProducto = req.body.nomProducto;
     desProducto = req.body.desProducto;
     cantidad = req.body.cantidad;
@@ -61,13 +100,15 @@ exports.crearProductos = async (req, res, next) => {
     id_Estatus = req.body.id_Estatus;
     id_catProducto = req.body.id_catProducto;
     imgProducto = req.body.imgProducto;
+    console.log(imgProducto);
     try {
         const result = await pool.execute(`INSERT INTO productos(id_producto, nomProducto,
             desProducto, cantidad, precio, id_usuario, id_Estatus, id_catProducto, imgProducto)
-         VALUES ( "", ?, ?, ?, ?, ?, ?, ?, ?)`,
+            VALUES ( "", ?, ?, ?, ?, ?, ?, ?, ?)`,
             [nomProducto, desProducto, cantidad, precio, id_usuario, id_Estatus, id_catProducto, imgProducto]);
-        res.status(200).json(result);
-    } catch (err) {
+            res.status(200).json({'message': "Producto guardado exitosamente"});
+        } catch (err) {
+            console.log(err);
         if (!err.statusCode) {
             err.statusCode = 500;
         }
@@ -100,6 +141,31 @@ exports.editarProductos = async (req, res, next) => {
         WHERE id_producto = ?`,
             [nomProducto, desProducto, cantidad, precio, id_usuario, id_Estatus,
                 id_catProducto, imgProducto, id_producto]);
+        res.status(200).json(result);
+    } catch (err) {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+        next(err);
+    }
+}
+
+/**
+ * 
+ * Metodo para editar img
+ * 
+ * @param {body} req Traer datos a editar
+ * @param {status(200)} res Respuesta de exito
+ * @param {*} next Error
+ */
+ exports.addImg = async (req, res, next) => {
+    console.log(req.body);
+    id_producto = req.body.id_producto;
+    imgProducto = req.body.imgProducto;
+    try {
+        const result = await pool.execute(`UPDATE productos SET imgProducto = ? 
+        WHERE id_producto = ?`,
+            [imgProducto, id_producto]);
         res.status(200).json(result);
     } catch (err) {
         if (!err.statusCode) {
