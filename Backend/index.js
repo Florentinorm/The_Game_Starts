@@ -1,6 +1,7 @@
 var express = require('express');
 const errorController = require('./controllers/error');
 const authRoutes = require('./routes/login.route');
+const adminRoutes = require('./routes/admin.route');
 var app = express();
 var bodyParser = require('body-parser');
 
@@ -26,7 +27,7 @@ var bodyParser = require('body-parser');
   app.use(errorController.get404);
   app.use(errorController.get500);
   
- // app.use('/api/admin', require('./routes/admin.route'));
+  app.use('/admin', adminRoutes);
  // app.use('/api/cliente', require('./routes/cliente.route'));
  // app.use('/api/login', require('./routes/login.route'));
 
