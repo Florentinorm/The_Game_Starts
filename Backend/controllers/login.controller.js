@@ -137,13 +137,12 @@ exports.login = async (req, res, next) => {
     const token = jwt.sign(
       {
         email: storedUser.email,
-        userId: storedUser.id,
+        userId: storedUser.id_usuario,
       },
       // jwt secret
       secret.secret.jwtSecret,
       { expiresIn: "1h" }
     );
-
     // retornará respuesta al front-end
     return res
       .status(200)
@@ -169,6 +168,7 @@ exports.login = async (req, res, next) => {
 exports.forgotPassword = async (req, res, next) => {
   //recibimos el email
   const { email, ...rest } = req.body
+  console.log(email)
 
   // Se verifica si se trajo correctamente el email
   if(!(email)){
@@ -179,6 +179,7 @@ exports.forgotPassword = async (req, res, next) => {
        //busca el usuario con el email recuperado desde el body
        let user = await User.find(email);
        const storedUser = user[0][0];
+       console.log(storedUser)
 
        // validación de email
        if (user[0].length <= 0){
@@ -192,7 +193,7 @@ exports.forgotPassword = async (req, res, next) => {
 
        //configuración del token
        const token = jwt.sign({
-        email: storedUser.email,
+        email: storedUser.correo,
         password: storedUser.password
        },
        secret.secret.jwtSecret, {expiresIn: '20m'});
@@ -201,14 +202,14 @@ exports.forgotPassword = async (req, res, next) => {
        verificationLink = "http://localhost:4200/create-new-password/"+token; //lo podemos meter en un .env
        
        //guardamos el token del usuario en la base de datos
-       const newuser = await User.update(storedUser.idUser, token);
+       const newuser = await User.update(storedUser.id_usuario, token);
 
        // Configuración Nodemailer para enviar el correo electrónico
       let info = await transporter.transporter.sendMail({
         from: '"The Game Stars" <GameStarts12rrr3@gmail.com', // sender address
-        to: storedUser.email, // list of receivers
+        to: storedUser.correo, // list of receivers
         subject: `Recuperación de Contraseña`, // Subject line
-        html: `<h3>Hola ${storedUser.name} este es un correo con el que podrás recuperar tu contraseña de forma segura<h3/>
+        html: `<h3>Hola ${storedUser.nombre} este es un correo con el que podrás recuperar tu contraseña de forma segura<h3/>
         <br>
         <b>Por favor, da click en el siguiente enlace:</b>
         <a href="${verificationLink}">Recuperar contraseña</a>`
@@ -266,7 +267,7 @@ exports.createNewPassword = async (req, res, next) => {
       //guardamos en una constante el password encriptado
       const hashedPassword = await bcrypt.hash(user.password, 12);
       //Hacemos el update del password nuevo
-      await User.updatePassword(storedUser.idUser, hashedPassword);
+      await User.updatePassword(storedUser.id_usuario, hashedPassword);
      
     } catch (error) {
       return res.status(400).json({message: "Ocurrió un error al guardar los datos, por favor vuelve a intentarlo", code: 1});

@@ -36,8 +36,8 @@ module.exports = class User {
     //retirna una sentencia sql
     return db.execute(
       //para evitar la injeccion sql especificamos los argumentos como ?
-      'INSERT INTO usuario (name, correo, apellidopaterno, apellidomaterno, password, id_rol, resetToken) VALUES (?, ?, ?, ?, ?, ?, ?)',
-      [user.name, user.email, user.apellidopaterno, user.apellidomaterno, user.password, user.id_rol, user.resetToken]
+      'INSERT INTO usuario (nombre, correo, apellido_paterno, apellido_materno, password, id_rol, id_Estatus, resetToken) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+      [user.name, user.email, user.apellidopaterno, user.apellidomaterno, user.password, user.id_rol, 1, user.resetToken]
     );
   }
 
@@ -46,7 +46,7 @@ module.exports = class User {
       //retirna una sentencia sql
       return db.execute(
         //para evitar la injeccion sql especificamos los argumentos como ?
-        `update usuario set resetToken = '${User}' WHERE idUser = '${idUser}';`
+        `update usuario set resetToken = '${User}' WHERE id_usuario = '${idUser}';`
       );
     }
 
@@ -55,7 +55,7 @@ module.exports = class User {
       //retirna una sentencia sql
       return db.execute(
         //para evitar la injeccion sql especificamos los argumentos como ?
-        `update usuario set password = '${User}' WHERE idUser = '${idUser}';`
+        `update usuario set password = '${User}' WHERE id_usuario = '${idUser}';`
       );
     }
 };
