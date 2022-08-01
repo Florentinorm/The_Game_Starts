@@ -24,10 +24,10 @@ var bodyParser = require('body-parser');
 
    //login
   app.use('/auth', authRoutes);
+  app.use('/admin', adminRoutes);
   app.use(errorController.get404);
   app.use(errorController.get500);
   
-  app.use('/admin', adminRoutes);
  // app.use('/api/cliente', require('./routes/cliente.route'));
  // app.use('/api/login', require('./routes/login.route'));
 

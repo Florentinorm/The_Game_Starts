@@ -19,7 +19,7 @@ module.exports = class User {
   static find(email) {
     try {
       //retorna una sentencia sql
-      return db.execute('SELECT * FROM users WHERE email = ?', [email]);
+      return db.execute('SELECT * FROM usuario WHERE correo = ?', [email]);
     } catch (error) {
       return 1;
     }
@@ -28,7 +28,7 @@ module.exports = class User {
     //busca un usuario en función al email
   static findToken(resetToken) {
     //retorna una sentencia sql
-    return db.execute('SELECT * FROM users WHERE resetToken = ?', [resetToken]);
+    return db.execute('SELECT * FROM usuario WHERE resetToken = ?', [resetToken]);
   }
 
   //guarda el nuevo usuario
@@ -36,7 +36,7 @@ module.exports = class User {
     //retirna una sentencia sql
     return db.execute(
       //para evitar la injeccion sql especificamos los argumentos como ?
-      'INSERT INTO users (name, email, apellidopaterno, apellidomaterno, password, id_rol, resetToken) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      'INSERT INTO usuario (name, correo, apellidopaterno, apellidomaterno, password, id_rol, resetToken) VALUES (?, ?, ?, ?, ?, ?, ?)',
       [user.name, user.email, user.apellidopaterno, user.apellidomaterno, user.password, user.id_rol, user.resetToken]
     );
   }
@@ -46,7 +46,7 @@ module.exports = class User {
       //retirna una sentencia sql
       return db.execute(
         //para evitar la injeccion sql especificamos los argumentos como ?
-        `update users set resetToken = '${User}' WHERE idUser = '${idUser}';`
+        `update usuario set resetToken = '${User}' WHERE idUser = '${idUser}';`
       );
     }
 
@@ -55,7 +55,7 @@ module.exports = class User {
       //retirna una sentencia sql
       return db.execute(
         //para evitar la injeccion sql especificamos los argumentos como ?
-        `update users set password = '${User}' WHERE idUser = '${idUser}';`
+        `update usuario set password = '${User}' WHERE idUser = '${idUser}';`
       );
     }
 };
