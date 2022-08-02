@@ -1,0 +1,16 @@
+.container{
+    margin: 5%;
+}
+
+.example-container .mat-form-field + .mat-form-field {
+    margin-left: 2%;
+}
+mat-form-field{
+    width: 40%;
+    margin-top: 2%;
+}
+.enviar{
+    margin-left: 60%;
+    margin-right: 2%;
+    background-color: green;
+}

@@ -45,9 +45,18 @@ export class AdminService {
   };
 
   addPro(producto: Producto){
-    console.log(producto);
     return this.http.post<Producto>(`${environment.API_URL_ADMIN}/pro/add`, producto)
       .pipe(catchError((error) => this.handlerError(error)));
+  }
+
+  ediPro(producto: Producto){
+    return this.http.put<Producto>(`${environment.API_URL_ADMIN}/pro/edi`, producto)
+    .pipe(catchError((error) => this.handlerError(error)));
+  }
+
+  producto(id: number){
+    return this.http.get<Producto>(`${environment.API_URL_ADMIN}/pro/${id}`)
+    .pipe(catchError((error) => this.handlerError(error)));
   }
 
     /*

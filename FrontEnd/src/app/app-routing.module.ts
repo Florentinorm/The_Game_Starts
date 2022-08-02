@@ -8,6 +8,9 @@ import { DetVentasComponent } from './pages/admin/det-ventas/det-ventas.componen
 import { ProductosComponent } from './pages/admin/productos/productos.component';
 import { VentasComponent } from './pages/admin/ventas/ventas.component';
 import { AddProductoComponent } from './pages/admin/add-producto/add-producto.component';
+import { EdiProductoComponent } from './pages/admin/edi-producto/edi-producto.component';
+import { DetProComponent } from './pages/admin/det-pro/det-pro.component';
+
 
 
 const routes: Routes = [
@@ -15,9 +18,11 @@ const routes: Routes = [
   {path: 'caracteristicas_producto', component: CaracteristicaProductosComponent},
   {path: 'homeAdmin', component: AdminComponent},
   {path: 'ventas', component: VentasComponent},
-  {path: 'detVentas', component: DetVentasComponent},
+  {path: 'detVentas/:id', component: DetVentasComponent},
   {path: 'productos', component: ProductosComponent},
   {path: 'addProducto', component: AddProductoComponent},
+  {path: 'ediProducto/:id', component: EdiProductoComponent},
+  {path: 'producto/:id', component: DetProComponent},
   {path: '', redirectTo: "/home", pathMatch: "full"},
   {path: '**', redirectTo: "/home"},
 

@@ -67,6 +67,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { DetProComponent } from './pages/admin/det-pro/det-pro.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { EdiProductoComponent } from './pages/admin/edi-producto/edi-producto.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProductosComponent,
     VentasComponent,
     AddProductoComponent,
-    DetProComponent
+    DetProComponent,
+    EdiProductoComponent
 
   ],
   imports: [
