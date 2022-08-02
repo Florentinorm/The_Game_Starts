@@ -26,7 +26,6 @@ export class DetProComponent implements OnInit {
   }
 
   datos(id: number){
-    console.log(id);
     this.adminSvc.producto(id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((producto: Producto) => {
@@ -44,11 +43,9 @@ export class DetProComponent implements OnInit {
   }
 
   usuario(id: any){
-    console.log(id);
     this.adminSvc.usuario(id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((usuario: UsuarioId) => {
-        console.log(usuario);
         this.nombre = usuario.nombre;
       })
   }

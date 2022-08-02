@@ -145,7 +145,7 @@ exports.crearProductos = async (req, res, next) => {
  * @param {*} next Error
  */
 exports.editarProductos = async (req, res, next) => {
-    console.log(req.body);
+
     id_producto = req.body.id_producto;
     nomProducto = req.body.nomProducto;
     desProducto = req.body.desProducto;
@@ -178,7 +178,7 @@ exports.editarProductos = async (req, res, next) => {
  * @param {*} next Error
  */
  exports.addImg = async (req, res, next) => {
-    console.log(req.body);
+
     id_producto = req.body.id_producto;
     imgProducto = req.body.imgProducto;
     try {
@@ -265,7 +265,7 @@ exports.obtenerUsuarioId = async (req, res, next) => {
  * @param {err} next Error 
  */
 exports.editarUsuario = async (req, res, next) => {
-    console.log(req.body);
+
     id_usuario = req.body.id_usuario;
     nombre = req.body.nombre;
     apellido_paterno = req.body.apellido_paterno;

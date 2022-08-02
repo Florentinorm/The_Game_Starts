@@ -44,7 +44,7 @@
         </mat-form-field>
         
     </div>
-    <button class="enviar" mat-raised-button color="primary" type="submit">Agregar</button>
+    <button class="enviar" mat-raised-button [disabled]="!signupForm.valid" color="primary" type="submit">Agregar</button>
     <button mat-raised-button color="warn" routerLink="/productos">Cancelar</button>
     </form>
 </div>

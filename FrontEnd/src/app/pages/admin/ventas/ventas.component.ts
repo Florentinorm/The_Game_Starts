@@ -30,7 +30,7 @@ export class VentasComponent implements OnInit {
     .pipe(takeUntil(this.destroy$))
     .subscribe((ventas: Venta[])=>{
       this.ventaData = ventas;
-      console.log(ventas);
+      
       this.dataSource = new MatTableDataSource(this.ventaData);
     })
   }
@@ -39,7 +39,7 @@ export class VentasComponent implements OnInit {
     this.adminSvc.eliminarVen(id)
     .pipe(takeUntil(this.destroy$))
     .subscribe((venta: any)=>{
-      console.log(venta);
+     
       this.listar();
     })
   }

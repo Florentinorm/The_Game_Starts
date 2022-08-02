@@ -11,9 +11,4 @@ const pool = mysql.createPool({
   password: config.password,
 });
 
-pool.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
-  if (err) throw err;
-  console.log('The solution is: ', rows[0].solution);
-});
-
 module.exports = pool.promise(); //exportamos como una promesa

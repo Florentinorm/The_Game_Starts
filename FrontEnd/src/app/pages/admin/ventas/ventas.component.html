@@ -1,5 +1,7 @@
 <div class="container">
-
+    <div class="addProducto">
+        <button mat-raised-button color="accent" routerLink="/productos">Productos</button>
+    </div>
     <mat-form-field appearance="standard">
         <label>Filtro</label>
         <input matInput (keyup)="applyFilter($event)" placeholder="" #input>

@@ -61,7 +61,6 @@ export class AdminService {
   }
 
   ediPro(producto: Producto){
-    console.log(producto);
     return this.http.put<Producto>(`${environment.API_URL_ADMIN}/pro/edi`, producto)
     .pipe(catchError((error) => this.handlerError(error)));
   }

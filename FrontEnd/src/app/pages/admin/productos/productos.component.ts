@@ -45,7 +45,6 @@ export class ProductosComponent implements OnInit {
     this.adminSvc.elimiarPro(id)
     .pipe(takeUntil(this.destroy$))
     .subscribe((productos: any)=>{
-      console.log(productos);
       this.listar();
     })
   }

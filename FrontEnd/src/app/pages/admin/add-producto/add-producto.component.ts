@@ -21,7 +21,6 @@ export class AddProductoComponent implements OnInit {
   onFileSelected() {
     const inputNode: any = document.querySelector('#file');
     this.srcResult  = inputNode.files;
-    console.log(this.srcResult);
   }
 
   constructor(private adminSvc: AdminService, private router: Router) {
@@ -53,7 +52,6 @@ export class AddProductoComponent implements OnInit {
       id_Estatus : 1,
       id_catProducto : this.signupForm.value.categoria
     }
-    console.log(this.producto);
     this.newPro(this.producto);
   }
 
@@ -79,8 +77,8 @@ export class AddProductoComponent implements OnInit {
     return new FormGroup({
       nomPro: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(20), this.noWhitespaceValidator]),
       categoria: new FormControl("", [Validators.required]),
-      cantidad: new FormControl("", [Validators.required]),
-      precio: new FormControl("", [Validators.required]),
+      cantidad: new FormControl("", [Validators.required, Validators.min(10), Validators.max(10000)]),
+      precio: new FormControl("", [Validators.required, Validators.min(50), Validators.max(300000)]),
       descripcion: new FormControl("", [
         Validators.required,
         Validators.minLength(7),

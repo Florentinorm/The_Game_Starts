@@ -27,7 +27,6 @@ export class EdiProductoComponent implements OnInit {
   onFileSelected() {
     const inputNode: any = document.querySelector('#file');
     this.srcResult  = inputNode.files;
-    console.log(this.srcResult);
   }
 
   constructor(private adminSvc: AdminService, private route: ActivatedRoute, private router: Router) {
@@ -41,7 +40,6 @@ export class EdiProductoComponent implements OnInit {
   }
 
   datos(id: number){
-    console.log(id);
     this.adminSvc.producto(id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((producto: Producto) => {
@@ -84,7 +82,7 @@ export class EdiProductoComponent implements OnInit {
     }else{
       this.id_catProducto = this.signupForm.value.categoria;
     }
-    console.log(this.nomProducto);
+
     this.producto = {
       id_producto : this.idPro,
       nomProducto : this.nomProducto,
@@ -113,7 +111,6 @@ export class EdiProductoComponent implements OnInit {
     this.adminSvc.ediPro(producto)
     .pipe(takeUntil(this.destroy$))
     .subscribe((productos)=>{
-      console.log(productos);
       this.router.navigate(['/productos']);
     })
   }
