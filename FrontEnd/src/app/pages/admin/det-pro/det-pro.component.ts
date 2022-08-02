@@ -3,6 +3,7 @@ import { Categoria, Producto } from '../models/producto';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AdminService } from '../service/admin.service';
 import { Subject, takeUntil } from 'rxjs';
+import { UsuarioId } from '../models/Usuario';
 
 @Component({
   selector: 'app-det-pro',
@@ -13,6 +14,7 @@ export class DetProComponent implements OnInit {
   productos: Producto = {};
   private destroy$ = new Subject<any>();
   idPro:any = '';
+  nombre: any = '';
   categorias:Categoria[]=[];
   constructor(private adminSvc: AdminService, private route: ActivatedRoute, private router: Router) {
   }
@@ -29,6 +31,7 @@ export class DetProComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((producto: Producto) => {
         this.productos = producto;
+        this.usuario(this.productos.id_usuario);
       })
   }
 
@@ -37,6 +40,16 @@ export class DetProComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((categorias: Categoria[]) => {
         this.categorias = categorias;
+      })
+  }
+
+  usuario(id: any){
+    console.log(id);
+    this.adminSvc.usuario(id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((usuario: UsuarioId) => {
+        console.log(usuario);
+        this.nombre = usuario.nombre;
       })
   }
 

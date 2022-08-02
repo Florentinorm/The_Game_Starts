@@ -1,12 +1,20 @@
 <mat-card>
     <mat-card>
-        <label> <b>Nombre del producto: </b> {{productos.nomProducto}}</label>
-        <br>
-        <label> <b>Descripcion del producto: </b> {{productos.desProducto}}</label>
-        <br>
-        <div *ngFor="let item of categorias">
-            <label *ngIf="item.id_catProducto === productos.id_catProducto" > <b>Categoria del producto: </b>{{ item.nomCategoria}}</label>
-        </div>
-        <br>
+        <mat-card-title>
+            <label> <b>Nombre del producto: </b> {{productos.nomProducto}}</label>
+        </mat-card-title>
+        <mat-card-content>
+            <label> <b>Descripcion del producto: </b> {{productos.desProducto}}</label>
+            <br>
+            <div *ngFor="let item of categorias">
+                <label *ngIf="item.id_catProducto === productos.id_catProducto"> <b>Categoria del producto: </b>{{
+                    item.nomCategoria}}</label>
+            </div>
+            <label><b>Nombre proveedor: </b> {{nombre}} </label>
+            <br>
+            <label><b>Cantidad: </b> {{productos.cantidad}} </label>
+            <br>
+            <label><b>Precio: </b> {{productos.precio}} </label>
+        </mat-card-content>
     </mat-card>
 </mat-card>

@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 import { ErrorHandlerService } from "./error-handler.service";
 
 import {HttpService} from './http.service';
+import { UsuarioId } from '../models/Usuario';
 
 
 @Injectable({
@@ -31,6 +32,16 @@ export class AdminService {
 
   productos(): Observable<Producto[]> {
     return this.http.get<Producto[]>(`${environment.API_URL_ADMIN}/pro`)
+      .pipe(catchError((error) => this.handlerError(error)));
+  };
+
+  ventas(): Observable<Venta[]> {
+    return this.http.get<Venta[]>(`${environment.API_URL_ADMIN}/ven`)
+      .pipe(catchError((error) => this.handlerError(error)));
+  };
+
+  eliminarVen(id: number): Observable<any> {
+    return this.http.delete<Producto>(`${environment.API_URL_ADMIN}/ven/${id}`)
       .pipe(catchError((error) => this.handlerError(error)));
   };
 
@@ -56,6 +67,11 @@ export class AdminService {
 
   producto(id: number){
     return this.http.get<Producto>(`${environment.API_URL_ADMIN}/pro/${id}`)
+    .pipe(catchError((error) => this.handlerError(error)));
+  }
+
+  usuario(id: number){
+    return this.http.get<UsuarioId>(`${environment.API_URL_ADMIN}/usu/${id}`)
     .pipe(catchError((error) => this.handlerError(error)));
   }
 
