@@ -168,7 +168,6 @@ exports.login = async (req, res, next) => {
 exports.forgotPassword = async (req, res, next) => {
   //recibimos el email
   const { email, ...rest } = req.body
-  console.log(email)
 
   // Se verifica si se trajo correctamente el email
   if(!(email)){
@@ -179,7 +178,6 @@ exports.forgotPassword = async (req, res, next) => {
        //busca el usuario con el email recuperado desde el body
        let user = await User.find(email);
        const storedUser = user[0][0];
-       console.log(storedUser)
 
        // validación de email
        if (user[0].length <= 0){

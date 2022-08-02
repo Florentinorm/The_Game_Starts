@@ -26,10 +26,10 @@ export class RegistroComponent implements OnInit {
   createFormGroup(): FormGroup {
     //retornaremos un FormGroup con las validaciones correspondientes
     return new FormGroup({
-      name: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(20),  this.noWhitespaceValidator ]),
-      apellidopaterno: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(20), this.noWhitespaceValidator ]),
-      apellidomaterno: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(20), this.noWhitespaceValidator  ]),
-      email: new FormControl("", [Validators.required, Validators.email, Validators.minLength(5), Validators.maxLength(50), this.noWhitespaceValidator]),
+      name: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(40),  this.noWhitespaceValidator ]),
+      apellidopaterno: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(40), this.noWhitespaceValidator ]),
+      apellidomaterno: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(40), this.noWhitespaceValidator  ]),
+      email: new FormControl("", [Validators.required, Validators.email, Validators.minLength(5), Validators.maxLength(70), this.noWhitespaceValidator]),
       password: new FormControl("", [
         Validators.required,
         Validators.minLength(7),

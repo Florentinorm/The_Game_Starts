@@ -26,7 +26,7 @@ import { DetProComponent } from './pages/admin/det-pro/det-pro.component';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'login', pathMatch: 'full'
+    path: 'login', redirectTo: 'login', pathMatch: 'full'
   },
   { path: "cliente", component: ClienteComponent, canActivate: [AuthGuard] },
   { path: "admin", component: AdminComponent , canActivate: [CheckAdminGuard] }, //ADMINISTRADOR

@@ -5,28 +5,28 @@
           <form [formGroup]="signupForm" (ngSubmit)="signup()" novalidate>
             <mat-form-field>
               <mat-label>Nombre</mat-label>
-              <input matInput  formControlName="name" maxlength="20" />
+              <input matInput  formControlName="name" maxlength="40" />
               <mat-error *ngIf="isValidField('name')">
                 {{ getErrorMessage('name') }}
               </mat-error>
             </mat-form-field>
             <mat-form-field>
               <mat-label>Apellido paterno</mat-label>
-              <input matInput formControlName="apellidopaterno" maxlength="20"/>
+              <input matInput formControlName="apellidopaterno" maxlength="40"/>
               <mat-error *ngIf="isValidField('apellidopaterno')">
                 {{ getErrorMessage('apellidopaterno') }}
               </mat-error>
             </mat-form-field>
             <mat-form-field>
               <mat-label>Apellido materno</mat-label>
-              <input matInput  formControlName="apellidomaterno" maxlength="20"/>
+              <input matInput  formControlName="apellidomaterno" maxlength="40"/>
               <mat-error *ngIf="isValidField('apellidomaterno')">
                 {{ getErrorMessage('apellidomaterno') }}
               </mat-error>
             </mat-form-field>
             <mat-form-field>
               <mat-label>Email</mat-label>
-              <input matInput placeholder="Ex. Jon@gmail.com" formControlName="email" maxlength="50"/>
+              <input matInput placeholder="Ex. Jon@gmail.com" formControlName="email" maxlength="70"/>
               <mat-error *ngIf="isValidField('email')">
                 {{ getErrorMessage('email') }}
               </mat-error>

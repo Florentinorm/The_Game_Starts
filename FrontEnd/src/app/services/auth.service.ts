@@ -37,7 +37,7 @@ export class AuthService {
     private router: Router
   ) {
     //se ejecutará el checktoken
-    //this.checkToken();
+   // this.checkToken();
   }
 
   //método que devolverá un observable y será de tipo User
@@ -77,7 +77,7 @@ export class AuthService {
             if (user.idRol === 2) {
               this.isUserAdmin$.next(true);
               this.isUserLoggedIn$.next(true);
-              this.router.navigate(['admin']);
+              this.router.navigate(['productos/']);
             } else if (user.idRol === 1) {
               this.isUserLoggedIn$.next(true);
               console.log(this.isUserLoggedIn$)
