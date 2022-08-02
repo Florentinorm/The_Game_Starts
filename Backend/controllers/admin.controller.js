@@ -54,7 +54,7 @@ exports.obtenerProductos = async (req, res, next) => {
 
     try {
         const result = await pool.execute(`SELECT id_producto, nomProducto, desProducto, cantidad,
-         precio, id_usuario, id_Estatus, id_catProducto, imgProducto FROM productos`);
+         precio, id_usuario, id_Estatus, id_catProducto FROM productos`);
         res.status(200).json(result[0]);
     } catch (err) {
         if (!err.statusCode) {
@@ -92,6 +92,7 @@ exports.obtenerCategoriaPro = async (req, res, next) => {
  * @param {err} next Error
  */
 exports.crearProductos = async (req, res, next) => {
+
     nomProducto = req.body.nomProducto;
     desProducto = req.body.desProducto;
     cantidad = req.body.cantidad;
@@ -99,14 +100,14 @@ exports.crearProductos = async (req, res, next) => {
     id_usuario = req.body.id_usuario;
     id_Estatus = req.body.id_Estatus;
     id_catProducto = req.body.id_catProducto;
-    imgProducto = req.body.imgProducto;
-    console.log(imgProducto);
     try {
         const result = await pool.execute(`INSERT INTO productos(id_producto, nomProducto,
-            desProducto, cantidad, precio, id_usuario, id_Estatus, id_catProducto, imgProducto)
-            VALUES ( "", ?, ?, ?, ?, ?, ?, ?, ?)`,
-            [nomProducto, desProducto, cantidad, precio, id_usuario, id_Estatus, id_catProducto, imgProducto]);
-            res.status(200).json({'message': "Producto guardado exitosamente"});
+            desProducto, cantidad, precio, id_usuario, id_Estatus, id_catProducto)
+            VALUES ( "", ?, ?, ?, ?, ?, ?, ?)`,
+            [nomProducto, desProducto, cantidad, precio, id_usuario, id_Estatus, id_catProducto]);
+
+        const idProNew = await pool.execute(`SELECT LAST_INSERT_ID() as id;`);
+            res.status(200).json(idProNew[0]);
         } catch (err) {
             console.log(err);
         if (!err.statusCode) {
@@ -125,7 +126,7 @@ exports.crearProductos = async (req, res, next) => {
  * @param {*} next Error
  */
 exports.editarProductos = async (req, res, next) => {
-    console.log(req.body);
+
     id_producto = req.body.id_producto;
     nomProducto = req.body.nomProducto;
     desProducto = req.body.desProducto;

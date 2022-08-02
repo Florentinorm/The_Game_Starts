@@ -2,8 +2,11 @@ var express = require('express');
 const errorController = require('./controllers/error');
 const authRoutes = require('./routes/login.route');
 const adminRoutes = require('./routes/admin.route');
+
 var app = express();
 var bodyParser = require('body-parser');
+
+
 
  app.use(bodyParser.json());
  app.use((req, res, next) => {
