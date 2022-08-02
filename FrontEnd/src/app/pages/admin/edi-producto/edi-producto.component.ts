@@ -18,6 +18,11 @@ export class EdiProductoComponent implements OnInit {
   productos: Producto = {};
   producto: Producto = {};
   idPro:any = '';
+  nomProducto:any="";
+  desProducto:any="";
+  cantidad:any=0;
+  precio:any=0;
+  id_catProducto:any=0;
 
   onFileSelected() {
     const inputNode: any = document.querySelector('#file');
@@ -53,16 +58,44 @@ export class EdiProductoComponent implements OnInit {
   }
 
   ediPro() {
+    if(!this.signupForm.value.nomPro){
+      this.nomProducto = this.productos.nomProducto;
+    }else{
+      this.nomProducto = this.signupForm.value.nomPro;
+    }
+    
+    if(!this.signupForm.value.descripcion){
+      this.desProducto = this.productos.desProducto;
+    }else{
+      this.desProducto = this.signupForm.value.descripcion;
+    }
+    if(!this.signupForm.value.cantidad){
+      this.cantidad = this.productos.cantidad;
+    }else{
+      this.cantidad = this.signupForm.value.cantidad;
+    }
+    if(!this.signupForm.value.precio){
+      this.precio = this.productos.precio;
+    }else{
+      this.precio = this.signupForm.value.precio;
+    }
+    if(!this.signupForm.value.categoria){
+      this.id_catProducto = this.productos.id_catProducto;
+    }else{
+      this.id_catProducto = this.signupForm.value.categoria;
+    }
+    console.log(this.nomProducto);
     this.producto = {
       id_producto : this.idPro,
-      nomProducto : this.productos.nomProducto,
-      desProducto : this.productos.desProducto,
-      cantidad : this.productos.cantidad,
-      precio : this.productos.precio,
+      nomProducto : this.nomProducto,
+      desProducto : this.desProducto,
+      cantidad : this.cantidad,
+      precio : this.precio,
       id_usuario : 1,
       id_Estatus : 1,
-      id_catProducto : this.productos.id_catProducto
+      id_catProducto : this.id_catProducto
     }
+
     this.newPro(this.producto);
   }
 

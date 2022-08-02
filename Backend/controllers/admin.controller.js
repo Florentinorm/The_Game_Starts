@@ -145,7 +145,7 @@ exports.crearProductos = async (req, res, next) => {
  * @param {*} next Error
  */
 exports.editarProductos = async (req, res, next) => {
-
+    console.log(req.body);
     id_producto = req.body.id_producto;
     nomProducto = req.body.nomProducto;
     desProducto = req.body.desProducto;
