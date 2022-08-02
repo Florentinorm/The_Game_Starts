@@ -1,1 +1,12 @@
-<p>det-pro works!</p>
+<mat-card>
+    <mat-card>
+        <label> <b>Nombre del producto: </b> {{productos.nomProducto}}</label>
+        <br>
+        <label> <b>Descripcion del producto: </b> {{productos.desProducto}}</label>
+        <br>
+        <div *ngFor="let item of categorias">
+            <label *ngIf="item.id_catProducto === productos.id_catProducto" > <b>Categoria del producto: </b>{{ item.nomCategoria}}</label>
+        </div>
+        <br>
+    </mat-card>
+</mat-card>

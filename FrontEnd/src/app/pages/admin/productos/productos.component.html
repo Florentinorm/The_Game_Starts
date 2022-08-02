@@ -31,7 +31,7 @@
         <!-- Visualizar Column -->
         <ng-container matColumnDef="detalles">
             <th mat-header-cell *matHeaderCellDef> Detalles </th>
-            <td mat-cell *matCellDef="let element"><mat-icon>find_in_page</mat-icon></td>
+            <td mat-cell *matCellDef="let element"><mat-icon routerLink="/producto/{{element.id_producto}}">find_in_page</mat-icon></td>
         </ng-container>
 
         <!-- editar Column -->
