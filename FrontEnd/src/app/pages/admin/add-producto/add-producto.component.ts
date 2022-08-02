@@ -19,21 +19,8 @@ export class AddProductoComponent implements OnInit {
 
   onFileSelected() {
     const inputNode: any = document.querySelector('#file');
-
-    if (typeof (FileReader) !== 'undefined') {
-      const reader = new FileReader();
-
-      reader.onload = (e: any) => {
-        let file = e.target.result;
-        const formData = new FormData();
-        formData.append('file', file);
-        this.srcResult = formData.get('file');
-        console.log(file, "imgProducto:", this.srcResult);
-      };
-
-      reader.readAsArrayBuffer(inputNode.files[0]);
-    }
-    
+    this.srcResult  = inputNode.files;
+    console.log(this.srcResult);
   }
 
   constructor(private adminSvc: AdminService, private router: Router) {
@@ -55,23 +42,32 @@ export class AddProductoComponent implements OnInit {
   addPro() {
     this.producto = {
       nomProducto : this.signupForm.value.nomPro,
-      desProducto : this.signupForm.value.categoria,
+      desProducto : this.signupForm.value.descripcion,
       cantidad : this.signupForm.value.cantidad,
       precio : this.signupForm.value.precio,
       id_usuario : 1,
       id_Estatus : 1,
-      id_catProducto : this.signupForm.value.categoria,
-      imgProducto : this.srcResult
+      id_catProducto : this.signupForm.value.categoria
     }
     console.log(this.producto);
     this.newPro(this.producto);
+  }
+
+  async addFotos(idPro: any){
+    const fd = new FormData();
+    for (let x = 0; x < this.srcResult.length; x++) {
+      fd.append(`foto_${x}`, this.srcResult[x])
+    }
+    fd.append("idProducto", idPro);
+    const respuesta = await this.adminSvc.agregarFotosDeProducto(fd);
+
   }
 
   newPro(producto:Producto){
     this.adminSvc.addPro(producto)
     .pipe(takeUntil(this.destroy$))
     .subscribe((productos: any)=>{
-      console.log(productos);
+      this.addFotos(productos[0].id);
     })
   }
 

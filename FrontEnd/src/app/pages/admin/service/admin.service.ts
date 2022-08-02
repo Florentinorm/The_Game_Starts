@@ -11,6 +11,8 @@ import { environment } from 'src/environments/environment';
 
 import { ErrorHandlerService } from "./error-handler.service";
 
+import {HttpService} from './http.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +25,8 @@ export class AdminService {
 
   constructor(
     private errorHandlerService: ErrorHandlerService,
-    private http: HttpClient
+    private http: HttpClient,
+    private http2: HttpService
   ) { };
 
   productos(): Observable<Producto[]> {
@@ -45,6 +48,13 @@ export class AdminService {
     console.log(producto);
     return this.http.post<Producto>(`${environment.API_URL_ADMIN}/pro/add`, producto)
       .pipe(catchError((error) => this.handlerError(error)));
+  }
+
+    /*
+  El formdata debe tener el id del producto
+   */
+  public async agregarFotosDeProducto(fotos: FormData) {
+    return this.http2.formdata("/pro/fotosProducto", fotos);
   }
 
   /**

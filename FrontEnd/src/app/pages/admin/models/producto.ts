@@ -7,7 +7,6 @@ export interface Producto {
     id_usuario?: number;
     id_Estatus?: number;
     id_catProducto?: number;
-    imgProducto?: Blob;
 }
 export interface ProductoID {
     idPro: number;
