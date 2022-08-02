@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Venta } from '../models/venta';
-import {MatTableDataSource} from '@angular/material/table';
+import { AdminService } from '../service/admin.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 
-const ventaData: Venta[] = [
-
-];
 
 @Component({
   selector: 'app-det-ventas',
@@ -12,17 +11,24 @@ const ventaData: Venta[] = [
   styleUrls: ['./det-ventas.component.css']
 })
 export class DetVentasComponent implements OnInit {
-  displayedColumns: string[] = ['nomUsuario', 'name', 'canVenta', 'totalVenta'];
-  dataSource = new MatTableDataSource(ventaData);
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  venta:Venta = {};
+  private destroy$ = new Subject<any>();
+  idVenta:any = '';
+  constructor(private adminSvc: AdminService, private route: ActivatedRoute, private router: Router) {
   }
 
-  constructor() { }
-
   ngOnInit(): void {
+    this.idVenta = this.route.snapshot.paramMap.get('id');
+    this.datos(this.idVenta);
+  }
+
+  datos(id: number){
+    this.adminSvc.venta(id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((venta: Venta) => {
+        console.log(venta);
+        this.venta = venta;
+      })
   }
 
 }

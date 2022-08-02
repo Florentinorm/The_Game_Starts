@@ -70,6 +70,11 @@ export class AdminService {
     .pipe(catchError((error) => this.handlerError(error)));
   }
 
+  venta(id: number){
+    return this.http.get<Venta>(`${environment.API_URL_ADMIN}/ven/${id}`)
+    .pipe(catchError((error) => this.handlerError(error)));
+  }
+
   usuario(id: number){
     return this.http.get<UsuarioId>(`${environment.API_URL_ADMIN}/usu/${id}`)
     .pipe(catchError((error) => this.handlerError(error)));
