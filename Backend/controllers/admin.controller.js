@@ -8,12 +8,12 @@ const pool = require('../database/db');
  * @param {err} next Error
  */
 exports.obtenerProductosId = async (req, res, next) => {
-    id_producto = req.body.id_producto;
+    id_producto = req.params.id;
     try {
         const result = await pool.execute(`SELECT id_producto, nomProducto, desProducto, cantidad,
-         precio, id_usuario, id_Estatus, id_catProducto, imgProducto FROM productos 
+         precio, id_usuario, id_Estatus, id_catProducto FROM productos 
          WHERE id_producto = ?`, [id_producto]);
-        res.status(200).json(result);
+        res.status(200).json(result[0][0]);
     } catch (err) {
         if (!err.statusCode) {
             err.statusCode = 500;
@@ -30,7 +30,7 @@ exports.obtenerProductosId = async (req, res, next) => {
  * @param {err} next Error
  */
  exports.obtenerImgId = async (req, res, next) => {
-    id_producto = req.body.id_producto;
+    id_producto = req.params.id;
     try {
         const result = await pool.execute(`SELECT imgProducto FROM productos 
          WHERE id_producto = ?`, [id_producto]);
@@ -135,14 +135,13 @@ exports.editarProductos = async (req, res, next) => {
     id_usuario = req.body.id_usuario;
     id_Estatus = req.body.id_Estatus;
     id_catProducto = req.body.id_catProducto;
-    imgProducto = req.body.imgProducto;
     try {
         const result = await pool.execute(`UPDATE productos SET nomProducto = ?, desProducto = ? ,
-        cantidad = ?, precio = ? , id_usuario = ? , id_Estatus = ? , id_catProducto = ? , imgProducto = ? 
+        cantidad = ?, precio = ? , id_usuario = ? , id_Estatus = ? , id_catProducto = ?  
         WHERE id_producto = ?`,
             [nomProducto, desProducto, cantidad, precio, id_usuario, id_Estatus,
-                id_catProducto, imgProducto, id_producto]);
-        res.status(200).json(result);
+                id_catProducto, id_producto]);
+        res.status(200).json({message: "Editado correctamente"});
     } catch (err) {
         if (!err.statusCode) {
             err.statusCode = 500;
