@@ -25,9 +25,7 @@ import { DetProComponent } from './pages/admin/det-pro/det-pro.component';
 
 
 const routes: Routes = [
-  {
-    path: '', redirectTo: 'login', pathMatch: 'full'
-  },
+
   { path: "cliente", component: ClienteComponent, canActivate: [AuthGuard] },
   { path: "admin", component: AdminComponent , canActivate: [CheckAdminGuard] }, //ADMINISTRADOR
   {path: 'ventas', component: VentasComponent, canActivate: [CheckAdminGuard]},
@@ -39,7 +37,10 @@ const routes: Routes = [
   { path: "login", component: LoginComponent, canActivate: [CheckLoginGuard]},
   { path: "signup", component: RegistroComponent },
   { path: "forgot-password", component: ForgotPasswordComponent},
-  { path: "create-new-password/:token", component: CreateNewPasswordComponent}
+  { path: "create-new-password/:token", component: CreateNewPasswordComponent},
+  {
+    path: '**', redirectTo: 'login', pathMatch: 'full'
+  },
 ];
 
 
