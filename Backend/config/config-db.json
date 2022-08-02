@@ -1,7 +1,7 @@
   {
     "host": "localhost",
-    "user": "DiegoJoan",
-    "database": "ecomerce",
-    "password": "DiegoJoan589"
+    "user": "root",
+    "database": "ecommerce",
+    "password": ""
   }
   

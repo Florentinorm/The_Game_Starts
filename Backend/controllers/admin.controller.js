@@ -65,7 +65,7 @@ exports.obtenerProductos = async (req, res, next) => {
 }
 
 /**
- * Metodo obtener productos
+ * Metodo obtener categoria
  * 
  * @param {result} res resultado de la consulta
  * @param {err} next Error
@@ -74,6 +74,25 @@ exports.obtenerCategoriaPro = async (req, res, next) => {
 
     try {
         const result = await pool.execute(`SELECT id_catProducto, nomCategoria FROM catproducto`);
+        res.status(200).json(result[0]);
+    } catch (err) {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+        next(err);
+    }
+}
+
+/**
+ * Metodo obtener categoria
+ * 
+ * @param {result} res resultado de la consulta
+ * @param {err} next Error
+ */
+exports.obtenerRol = async (req, res, next) => {
+
+    try {
+        const result = await pool.execute(`SELECT id_rol, nombre_rol FROM rol`);
         res.status(200).json(result[0]);
     } catch (err) {
         if (!err.statusCode) {
@@ -222,12 +241,12 @@ exports.obtenerUsuario = async (req, res, next) => {
  * @param {result} res Datos del usuario seleccionado
  * @param {err} next Error
  */
-exports.obtenerUsuario = async (req, res, next) => {
+exports.obtenerUsuarioId = async (req, res, next) => {
     id_usuario = req.params.id;
     try {
-        const result = await pool.execute(`SELECT id_usuario, nombre, apellido_paterno,
-         apellido_materno, password,correo, usuario, id_rol, id_Estatus FROM usuario WHERE id_usuario = ?`, [id_usuario]);
-        res.status(200).json(result);
+        const result = await pool.execute(`SELECT CONCAT(nombre," ",apellido_paterno," ",apellido_materno) nombre, id_rol, id_Estatus FROM usuario WHERE id_usuario = ?`, [id_usuario]);
+        
+        res.status(200).json(result[0][0]);
 
     } catch (err) {
         if (!err.statusCode) {
@@ -251,16 +270,13 @@ exports.editarUsuario = async (req, res, next) => {
     nombre = req.body.nombre;
     apellido_paterno = req.body.apellido_paterno;
     apellido_materno = req.body.apellido_materno;
-    password = req.body.password;
-    correo = req.body.correo;
-    usuario = req.body.usuario;
     id_rol = req.body.id_rol;
     id_Estatus = req.body.id_Estatus;
     try {
         const result = await pool.execute(`UPDATE usuario SET nombre = ? , apellido_paterno = ? , 
-        apellido_materno = ? , password = ? , correo = ? , usuario = ? , id_rol = ? , id_Estatus = ? 
+        apellido_materno = ? , id_rol = ? , id_Estatus = ? 
         WHERE id_usuario = ?`,
-            [nombre, apellido_paterno, apellido_materno, password, correo, usuario,
+            [nombre, apellido_paterno, apellido_materno,
                 id_rol, id_Estatus, id_usuario]);
         res.status(200).json(result);
     } catch (err) {
@@ -302,9 +318,12 @@ exports.eliminarUsuario = async (req, res, next) => {
  */
 exports.obtenerVentas = async (req, res, next) => {
     try {
-        const result = await pool.execute(`SELECT id_venta, nomVenta, desVenta, canVenta, id_producto,
-         id_usuario, totalVenta FROM ventas`);
-        res.status(200).json(result);
+        const result = await pool.execute(`SELECT ven.id_venta, ven.nomVenta, ven.desVenta, ven.canVenta,
+        ven.id_producto, pro.nomProducto, ven.id_usuario, 
+        CONCAT(usu.nombre," ",usu.apellido_paterno," ",usu.apellido_materno) nombre, 
+        ven.totalVenta FROM ventas ven INNER JOIN productos pro ON pro.id_producto = ven.id_producto 
+        INNER JOIN usuario usu ON usu.id_usuario = ven.id_usuario`);
+        res.status(200).json(result[0]);
 
     } catch (err) {
         if (!err.statusCode) {
@@ -330,7 +349,29 @@ exports.obtenerDetalleVenta = async (req, res, next) => {
          CONCAT(usu.nombre," ",usu.apellido_paterno," ",usu.apellido_materno) nombre, 
          ven.totalVenta FROM ventas ven INNER JOIN productos pro ON pro.id_producto = ven.id_producto 
          INNER JOIN usuario usu ON usu.id_usuario = ven.id_usuario WHERE ven.id_venta = ?`, [id_venta]);
-        res.status(200).json(result);
+        res.status(200).json(result[0][0]);
+
+    } catch (err) {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+        next(err);
+    }
+}
+
+/**
+ * 
+ * Metodo eliminar Venta
+ * 
+ * @param {params.id} req Traer id del usuario a eliminar
+ * @param {status(200)} res Eliminado correctamente
+ * @param {err} next Error
+ */
+exports.eliminarVenta = async (req, res, next) => {
+    id_venta = req.params.id;
+    try {
+        const result = await pool.execute(`DELETE FROM ventas WHERE id_venta = ?`, [id_venta]);
+        res.status(200).json({message: 'Eliminado correctamente'});
 
     } catch (err) {
         if (!err.statusCode) {

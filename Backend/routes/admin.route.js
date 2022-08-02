@@ -50,11 +50,12 @@ router.post('/pro/fotosProducto', (req, res) => {
 router.get('/catPro', productoCotroller.obtenerCategoriaPro);
 
 router.get('/usu', productoCotroller.obtenerUsuario);
-router.get('/usu/:id', productoCotroller.obtenerProductosId);
+router.get('/usu/:id', productoCotroller.obtenerUsuarioId);
 router.post('/usu/edi', productoCotroller.editarUsuario);
 router.delete('/usu/:id', productoCotroller.eliminarUsuario);
 
 router.get('/ven', productoCotroller.obtenerVentas);
 router.get('/ven/:id', productoCotroller.obtenerDetalleVenta);
+router.delete('/ven/:id', productoCotroller.eliminarVenta);
 
 module.exports = router;
