@@ -69,7 +69,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/Login-Register/login/login.component';
 import { RegistroComponent } from './pages/Login-Register/registro/registro.component';
-import { AdminComponent } from './pages/admin/admin.component';
+import { AdminComponent } from './pages/admin/admin/admin.component';
 import { ClienteComponent } from './pages/cliente/cliente.component';
 import { NavigationComponent } from './pages/navigation/navigation.component';
 import { AuthInterceptorService } from "./services/auth-interceptor.service";
@@ -90,7 +90,6 @@ import { NgxSpinnerModule } from "ngx-spinner";
     TableroProductosComponent,
     CaracteristicaProductosComponent,
     ProcesoComprasComponent,
-    AdminComponent,
     DetVentasComponent,
     ProductosComponent,
     VentasComponent,
